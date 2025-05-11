@@ -2,35 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../contexts/AppContext';
 import JsonViewer from '../components/UI/JsonViewer/JsonViewer'; // Reuse JsonViewer
 import styles from './RuleSetEditorPage.module.css'; // Create this CSS Module (can be similar to DataManagementPage.module.css)
-import fs from 'fs';
+// import fs from 'fs';
 
 import updateJsonObject from '../utils/jsonUpdate';
 
 const RuleSetEditorPage = () => {
-  const { setRuleSet } = useAppContext();
-  const [rulesString, setRulesString] = useState('');
+  const { setRuleSet, ruleSet } = useAppContext();
+  const [rulesString, setRulesString] = useState(JSON.stringify(ruleSet, null, 2));
   const [currentPath, setCurrentPath] = useState([]);
-  const [ruleSet, setRuleSetState] = useState({});
-
-  useEffect(() => {
-    fs.readFile('data/ruleSet.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read ruleSet.json:", err);
-        setRuleSetState({});
-        setRulesString(JSON.stringify({}, null, 2));
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setRuleSetState(parsedData);
-        setRulesString(JSON.stringify(parsedData, null, 2));
-      } catch (parseError) {
-        console.error("Failed to parse ruleSet.json:", parseError);
-        setRuleSetState({});
-        setRulesString(JSON.stringify({}, null, 2));
-      }
-    });
-  }, []);
 
   useEffect(() => {
     setRulesString(JSON.stringify(ruleSet, null, 2));
@@ -40,14 +19,21 @@ const RuleSetEditorPage = () => {
     try {
       const newRules = JSON.parse(rulesString);
       setRuleSet(newRules);
-      fs.writeFile('data/ruleSet.json', JSON.stringify(newRules, null, 2), (err) => {
-        if (err) {
-          console.error("Failed to write ruleSet.json:", err);
-          alert('Ruleset saved, but failed to persist to file!');
-        } else {
-          alert('Ruleset saved!');
-        }
-      });
+
+      const fileName = 'ruleSet.json';
+      const json = JSON.stringify(newRules, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const href = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+
+      alert('Ruleset saved and downloaded!');
     } catch (error) {
       alert('Error parsing JSON for ruleset: ' + error.message);
     }
@@ -94,15 +80,11 @@ const RuleSetEditorPage = () => {
           ))}
         </div>
         <JsonViewer data={ruleSet} currentPath={currentPath} onNavigate={handleNavigateJson} onEdit={(newValue, path) => {
-          setRuleSetState(updateJsonObject(ruleSet, path, newValue));
+          setRuleSet(updateJsonObject(ruleSet, path, newValue));
         }} />
       </div>
     </div>
   );
 };
-  const setRuleSet = (newRules) => {
-    setRuleSetState(newRules);
-    setRulesString(JSON.stringify(newRules, null, 2));
-  };
 
 export default RuleSetEditorPage;

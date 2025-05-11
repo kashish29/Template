@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import fs from 'fs';
+// import fs from 'fs';
 
 const AppContext = createContext();
 
@@ -9,50 +9,35 @@ export const AppProvider = ({ children }) => {
   const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
 
   useEffect(() => {
-    fs.readFile('data/hardcodedData.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read hardcodedData.json:", err);
+    fetch('data/hardcodedData.json')
+      .then(response => response.json())
+      .then(data => {
+        setHardcodedDataState(data);
+      })
+      .catch(error => {
+        console.error("Failed to read hardcodedData.json:", error);
         setHardcodedDataState({});
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setHardcodedDataState(parsedData);
-      } catch (parseError) {
-        console.error("Failed to parse hardcodedData.json:", parseError);
-        setHardcodedDataState({});
-      }
-    });
+      });
 
-    fs.readFile('data/userPreferences.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read userPreferences.json:", err);
+    fetch('data/userPreferences.json')
+      .then(response => response.json())
+      .then(data => {
+        setUserPreferencesState(data);
+      })
+      .catch(error => {
+        console.error("Failed to read userPreferences.json:", error);
         setUserPreferencesState({});
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setUserPreferencesState(parsedData);
-      } catch (parseError) {
-        console.error("Failed to parse userPreferences.json:", parseError);
-        setUserPreferencesState({});
-      }
-    });
+      });
 
-    fs.readFile('data/ruleSet.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read ruleSet.json:", err);
+    fetch('data/ruleSet.json')
+      .then(response => response.json())
+      .then(data => {
+        setRuleSetState(data);
+      })
+      .catch(error => {
+        console.error("Failed to read ruleSet.json:", error);
         setRuleSetState({});
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setRuleSetState(parsedData);
-      } catch (parseError) {
-        console.error("Failed to parse ruleSet.json:", parseError);
-        setRuleSetState({});
-      }
-    });
+      });
   }, []);
 
 

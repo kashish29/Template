@@ -3,33 +3,12 @@ import { useAppContext } from '../contexts/AppContext';
 import updateJsonObject from '../utils/jsonUpdate';
 import JsonViewer from '../components/UI/JsonViewer/JsonViewer';
 import styles from './UserSettingsPage.module.css';
-import fs from 'fs';
+// import fs from 'fs';
 
 const UserSettingsPage = () => {
-  const { setUserPreferences } = useAppContext(); // Assuming these will be added to context
-  const [settingsString, setSettingsString] = useState('');
+  const { setUserPreferences, userPreferences } = useAppContext(); // Assuming these will be added to context
+  const [settingsString, setSettingsString] = useState(JSON.stringify(userPreferences, null, 2));
   const [currentPath, setCurrentPath] = useState([]);
-  const [userPreferences, setUserPreferencesState] = useState(null);
-
-  useEffect(() => {
-    fs.readFile('data/userPreferences.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read userPreferences.json:", err);
-        setUserPreferencesState({});
-        setSettingsString(JSON.stringify({}, null, 2));
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setUserPreferencesState(parsedData);
-        setSettingsString(JSON.stringify(parsedData, null, 2));
-      } catch (parseError) {
-        console.error("Failed to parse userPreferences.json:", parseError);
-        setUserPreferencesState({});
-        setSettingsString(JSON.stringify({}, null, 2));
-      }
-    });
-  }, []);
 
   useEffect(() => {
     if (userPreferences) {
@@ -41,14 +20,21 @@ const UserSettingsPage = () => {
     try {
       const newSettings = JSON.parse(settingsString);
       setUserPreferences(newSettings); // Assuming setUserPreferences updates localStorage
-      fs.writeFile('data/userPreferences.json', JSON.stringify(newSettings, null, 2), (err) => {
-        if (err) {
-          console.error("Failed to write userPreferences.json:", err);
-          alert('User preferences saved, but failed to persist to file!');
-        } else {
-          alert('User preferences saved!');
-        }
-      });
+
+      const fileName = 'userPreferences.json';
+      const json = JSON.stringify(newSettings, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const href = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+
+      alert('User preferences saved and downloaded!');
     } catch (error) {
       alert('Error parsing JSON for user preferences: ' + error.message);
     }
@@ -98,17 +84,11 @@ const UserSettingsPage = () => {
           ))}
         </div>
         <JsonViewer data={userPreferences} currentPath={currentPath} onNavigate={handleNavigateJson} onEdit={(newValue, path) => {
-          setUserPreferencesState(updateJsonObject(userPreferences, path, newValue));
+          setUserPreferences(updateJsonObject(userPreferences, path, newValue));
         }} />
       </div>
-
     </div>
   );
 };
-
-  const setUserPreferences = (newSettings) => {
-    setUserPreferencesState(newSettings);
-    setSettingsString(JSON.stringify(newSettings, null, 2));
-  };
 
 export default UserSettingsPage;

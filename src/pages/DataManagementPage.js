@@ -3,33 +3,12 @@ import { useAppContext } from '../contexts/AppContext';
 import updateJsonObject from '../utils/jsonUpdate';
 import JsonViewer from '../components/UI/JsonViewer/JsonViewer';
 import styles from './DataManagementPage.module.css';
-import fs from 'fs';
+// import fs from 'fs';
 
 const DataManagementPage = () => {
-  const { setHardcodedData } = useAppContext();
-  const [dataString, setDataString] = useState('');
+  const { setHardcodedData, hardcodedData } = useAppContext();
+  const [dataString, setDataString] = useState(JSON.stringify(hardcodedData, null, 2));
   const [currentPath, setCurrentPath] = useState([]);
-  const [hardcodedData, setHardcodedDataState] = useState({});
-
-  useEffect(() => {
-    fs.readFile('data/hardcodedData.json', 'utf8', (err, data) => {
-      if (err) {
-        console.error("Failed to read hardcodedData.json:", err);
-        setHardcodedDataState({});
-        setDataString(JSON.stringify({}, null, 2));
-        return;
-      }
-      try {
-        const parsedData = JSON.parse(data);
-        setHardcodedDataState(parsedData);
-        setDataString(JSON.stringify(parsedData, null, 2));
-      } catch (parseError) {
-        console.error("Failed to parse hardcodedData.json:", parseError);
-        setHardcodedDataState({});
-        setDataString(JSON.stringify({}, null, 2));
-      }
-    });
-  }, []);
 
   useEffect(() => {
     setDataString(JSON.stringify(hardcodedData, null, 2));
@@ -40,14 +19,21 @@ const DataManagementPage = () => {
     try {
       const newData = JSON.parse(dataString);
       setHardcodedData(newData);
-      fs.writeFile('data/hardcodedData.json', JSON.stringify(newData, null, 2), (err) => {
-        if (err) {
-          console.error("Failed to write hardcodedData.json:", err);
-          alert('Data saved, but failed to persist to file!');
-        } else {
-          alert('Data saved!');
-        }
-      });
+
+      const fileName = 'hardcodedData.json';
+      const json = JSON.stringify(newData, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const href = URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = href;
+      link.download = fileName;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+
+      alert('Data saved and downloaded!');
     } catch (error) {
       alert('Error parsing JSON: ' + error.message);
     }
@@ -93,16 +79,11 @@ const DataManagementPage = () => {
           ))}
         </div>
         <JsonViewer data={hardcodedData} currentPath={currentPath} onNavigate={handleNavigateJson} onEdit={(newValue, path) => {
-          setHardcodedDataState(updateJsonObject(hardcodedData, path, newValue));
+          setHardcodedData(updateJsonObject(hardcodedData, path, newValue));
         }} />
       </div>
-
     </div>
   );
 };
-  const setHardcodedData = (newData) => {
-    setHardcodedDataState(newData);
-    setDataString(JSON.stringify(newData, null, 2));
-  };
 
 export default DataManagementPage;
