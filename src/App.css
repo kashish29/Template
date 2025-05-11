@@ -1,0 +1,41 @@
+.App {
+  text-align: center; /* Basic alignment, can be removed if not desired */
+}
+
+.main-nav {
+  padding: 10px;
+  background-color: #f0f0f0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.main-nav a {
+  margin: 0 15px;
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 500;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
+
+.content-container {
+  padding: 0 20px; /* Add some padding to the main content area */
+  max-width: 1200px; /* Optional: constrain content width */
+  margin: 0 auto; /* Center content if max-width is set */
+  text-align: left; /* Override .App text-align for content */
+}
+
+/* Basic body styles can go into index.css or here if preferred */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #e9ecef; /* Light gray background for the whole page */
+  color: #212529; /* Default text color */
+}

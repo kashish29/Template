@@ -1,0 +1,33 @@
+/* src/components/Filters/MultiSelect.module.css */
+.multiSelectContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.label {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 5px;
+}
+.optionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.optionButton {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.optionButton:hover {
+  background-color: #e9ecef;
+}
+.optionButton.selected {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}

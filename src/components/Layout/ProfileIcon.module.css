@@ -1,0 +1,35 @@
+/* src/components/Layout/ProfileIcon.module.css */
+.profileIconContainer {
+  cursor: pointer;
+  margin-left: auto; /* Pushes the icon to the right in TopBar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #4a6fa5; /* A slightly different blue */
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.profileIconContainer:hover {
+  background-color: #3b5a8a; /* Darker on hover */
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.defaultAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}

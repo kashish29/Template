@@ -1,0 +1,28 @@
+/* src/components/Filters/FilterBar.module.css */
+.filterBar {
+  background-color: #f8f9fa; /* Lighter background */
+  padding: 15px 20px;
+  margin-bottom: 25px;
+  border-radius: 6px;
+  display: flex;
+  flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+  gap: 20px; /* Increased gap */
+  align-items: flex-end; /* Align items to the bottom for varied heights */
+  border: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* Styles for individual filter components within the bar can be targeted if needed,
+   but prefer styling within the components themselves. */
+
+.toggleWrapper { /* For toggle button with external label */
+  display: flex;
+  flex-direction: column; /* Stack label on top */
+  gap: 5px;
+  align-items: flex-start;
+}
+.toggleLabel {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 2px; /* Small space between label and toggle */
+}

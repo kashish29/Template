@@ -1,0 +1,40 @@
+/* src/components/Widgets/CardListWidget.module.css */
+.widget {
+  background-color: #f9f9f9; /* Slightly different background for the list widget itself */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.widget h3 {
+  margin-top: 0;
+  margin-bottom: 16px; /* More space before the card list */
+  font-size: 1.2em;
+  color: #333;
+}
+
+.cardListContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* Spacing between cards */
+}
+
+/* Default layout (can be overridden by 'grid' or 'list' if specified in config) */
+.cardListContainer.grid {
+  display: grid;
+  /* Adjust minmax for desired card width and responsiveness */
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.cardListContainer.list {
+  flex-direction: column;
+}
+
+/* Styles for individual cards within the list are in Card.module.css */
+
+.error {
+  color: #d32f2f; /* Material Design error color */
+  font-weight: bold;
+}

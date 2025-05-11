@@ -1,0 +1,29 @@
+/* src/components/Filters/ToggleButton.module.css */
+.toggleButton {
+  padding: 8px 15px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.95em;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  min-width: 80px; /* Ensure a minimum width */
+  text-align: center;
+}
+
+.toggleButton:hover {
+  background-color: #e9ecef;
+  border-color: #bbb;
+}
+
+.toggleButton.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.toggleButton.active:hover {
+  background-color: #0069d9;
+  border-color: #0062cc;
+}

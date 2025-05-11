@@ -1,0 +1,79 @@
+/* src/pages/MainViewPage.module.css */
+.mainViewPage {
+  padding: 20px;
+}
+.pageTitle {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.widgetsContainer {
+  margin-top: 20px;
+  /* Grid styles will be applied inline based on ruleSet.mainViewConfig.layout */
+}
+
+/* Basic Widget Styling */
+.widget {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  min-height: 150px; /* Ensure widgets have some height */
+}
+.widget h3, .widget h4 {
+  margin-top: 0;
+  color: #34495e;
+}
+.metricWidget {
+  text-align: center;
+}
+.metricValue {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: #2980b9;
+  margin: 10px 0;
+}
+.metricWidget small {
+  color: #7f8c8d;
+}
+.placeholderWidget {
+  border: 2px dashed #bdc3c7;
+  background-color: #f8f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.placeholderWidget pre {
+  font-size: 0.8em;
+  background-color: #e9ecef;
+  padding: 5px;
+  border-radius: 4px;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.widgetError {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid #e57373;
+}
+
+.debugInfo {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  border-radius: 4px;
+}
+.debugInfo h4 {
+  margin-top: 0;
+  color: #ffffff;
+}
+.debugInfo pre {
+  background-color: #34495e;
+  padding: 10px;
+  border-radius: 3px;
+  overflow-x: auto;
+}

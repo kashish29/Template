@@ -1,0 +1,84 @@
+/* src/pages/DataManagementPage.module.css */
+.pageContainer {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.title {
+  color: #333;
+  margin-bottom: 10px;
+}
+.description {
+  color: #555;
+  margin-bottom: 20px;
+}
+.viewerContainer, .editorContainer {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  margin-bottom: 30px;
+}
+.viewerContainer h3, .editorContainer h3 {
+  margin-top: 0;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+.breadcrumbs {
+  margin-bottom: 15px;
+  font-size: 0.9em;
+  color: #666;
+}
+.crumbButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+.crumbButton:hover {
+  color: #0056b3;
+}
+.crumbSeparator {
+  margin: 0 5px;
+}
+.jsonTextarea {
+  width: 100%;
+  min-height: 300px;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+}
+.actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s;
+}
+.saveButton {
+  background-color: #28a745; /* Green */
+}
+.saveButton:hover {
+  background-color: #218838;
+}
+.exportButton {
+  background-color: #17a2b8; /* Teal */
+}
+.exportButton:hover {
+  background-color: #138496;
+}

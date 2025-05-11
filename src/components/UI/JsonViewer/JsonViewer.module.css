@@ -1,0 +1,54 @@
+/* src/components/UI/JsonViewer/JsonViewer.module.css */
+.jsonViewer {
+  font-family: monospace;
+  font-size: 0.9em;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+.entry {
+  margin-bottom: 5px;
+  padding-left: 15px; /* Indentation for entries */
+  position: relative;
+}
+.entry:before { /* Simple visual connector for structure */
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 0.6em;
+  width: 5px;
+  height: 1px;
+  background-color: #ccc;
+}
+.key {
+  color: #a52a2a; /* Brown */
+  margin-right: 5px;
+  font-weight: bold;
+}
+.keyPrimitive {
+  color: #a52a2a;
+  font-weight: bold;
+}
+.value {
+  color: #0000cd; /* MediumBlue */
+}
+.navButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  font-family: monospace;
+  font-size: 1em;
+}
+.navButton:hover {
+  color: #0056b3;
+}
+.error {
+  color: red;
+}
+.leafNode {
+  padding: 5px;
+}

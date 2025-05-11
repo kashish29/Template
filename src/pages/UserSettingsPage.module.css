@@ -1,0 +1,103 @@
+.pageContainer {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.title {
+  color: #333;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+.viewerContainer,
+.editorContainer {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.viewerContainer h3,
+.editorContainer h3 {
+  margin-top: 0;
+  color: #444;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+.jsonTextarea {
+  width: 100%;
+  min-height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: 0.9em;
+  box-sizing: border-box; /* Ensures padding doesn't add to width */
+}
+
+.actions {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-left: 10px;
+  transition: background-color 0.2s ease;
+}
+
+.saveButton {
+  background-color: #28a745;
+  color: white;
+}
+
+.saveButton:hover {
+  background-color: #218838;
+}
+
+.exportButton { /* Kept for consistency, though not used in UserSettingsPage */
+  background-color: #007bff;
+  color: white;
+}
+
+.exportButton:hover {
+  background-color: #0056b3;
+}
+
+.breadcrumbs {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.crumbButton {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.crumbButton:hover {
+  color: #0056b3;
+}
+
+.crumbSeparator {
+  margin: 0 5px;
+  color: #888;
+}

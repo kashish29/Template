@@ -1,0 +1,36 @@
+/* src/components/Filters/DateRangePicker.module.css */
+.dateRangePickerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.label {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 3px; /* Adjust as needed */
+}
+
+.inputsWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input {
+  padding: 7px 10px; /* Slightly adjusted padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.95em; /* Slightly smaller font for date inputs */
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.separator {
+  color: #555;
+  font-size: 0.9em;
+}

@@ -1,0 +1,130 @@
+/* src/components/Widgets/TableWidget.module.css */
+.widget {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.widget h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f7f7f7;
+  font-weight: bold;
+  color: #555;
+}
+
+.sortableHeader {
+  cursor: pointer;
+}
+
+.sortableHeader:hover {
+  background-color: #efefef;
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: #fdfdfd;
+}
+
+.table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+.error {
+  color: #d32f2f; 
+  font-weight: bold;
+}
+
+
+.hierarchicalCell {
+  position: relative;
+  
+}
+
+
+
+.hierarchicalCell[data-level="1"] {
+  padding-left: calc(var(--base-indent) * 1);
+}
+.hierarchicalCell[data-level="2"] {
+  padding-left: calc(var(--base-indent) * 2);
+}
+.hierarchicalCell[data-level="3"] {
+  padding-left: calc(var(--base-indent) * 3);
+}
+
+
+
+.table tr[data-level="0"] {
+  background-color: #F8F9FA; 
+  font-weight: bold; 
+}
+.table tr[data-level="0"]:hover {
+  background-color: #E9ECEF; 
+}
+
+.table tr[data-level="1"] {
+  background-color: #FFFFFF; 
+}
+.table tr[data-level="1"]:hover {
+  background-color: #F1F3F5; 
+}
+
+.table tr[data-level="2"] {
+  background-color: #FDFEFE; 
+}
+.table tr[data-level="2"]:hover {
+  background-color: #F0F2F4; 
+}
+
+
+.hierarchicalCell[data-level="1"]::before,
+.hierarchicalCell[data-level="2"]::before,
+.hierarchicalCell[data-level="3"]::before { 
+  content: '';
+  position: absolute;
+  left: calc( (var(--base-indent) / 2) - 1px); 
+  top: 5px;    
+  bottom: 5px; 
+  width: 2px;
+  background-color: #cccccc; 
+}
+
+
+.hierarchicalCell[data-level="2"]::before {
+  left: calc( var(--base-indent) + (var(--base-indent) / 2) - 1px);
+}
+.hierarchicalCell[data-level="3"]::before {
+  left: calc( (var(--base-indent) * 2) + (var(--base-indent) / 2) - 1px);
+}
+
+
+/* Default even/odd striping */
+/* .table tbody tr:nth-child(even) {
+  background-color: #f9f9f9; 
+} 
+*/
+
+.table tbody tr:hover {
+  background-color: #f0f0f0; 
+}

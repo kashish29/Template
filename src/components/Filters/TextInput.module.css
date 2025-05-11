@@ -1,0 +1,21 @@
+/* src/components/Filters/TextInput.module.css */
+.textInputContainer {
+  display: flex;
+  flex-direction: column; /* Or row if preferred */
+  gap: 5px;
+}
+.label {
+  font-size: 0.9em;
+  color: #555;
+}
+.input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+.input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
