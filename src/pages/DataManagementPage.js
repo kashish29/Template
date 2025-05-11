@@ -1,15 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../contexts/AppContext';
+import updateJsonObject from '../utils/jsonUpdate';
 import JsonViewer from '../components/UI/JsonViewer/JsonViewer';
-import styles from './DataManagementPage.module.css'; 
+import styles from './DataManagementPage.module.css';
+import fs from 'fs';
 
 const DataManagementPage = () => {
-  const { hardcodedData, setHardcodedData } = useAppContext();
+  const { setHardcodedData } = useAppContext();
   const [dataString, setDataString] = useState('');
-  const [currentPath, setCurrentPath] = useState([]); 
+  const [currentPath, setCurrentPath] = useState([]);
+  const [hardcodedData, setHardcodedDataState] = useState({});
 
   useEffect(() => {
-    
+    fs.readFile('data/hardcodedData.json', 'utf8', (err, data) => {
+      if (err) {
+        console.error("Failed to read hardcodedData.json:", err);
+        setHardcodedDataState({});
+        setDataString(JSON.stringify({}, null, 2));
+        return;
+      }
+      try {
+        const parsedData = JSON.parse(data);
+        setHardcodedDataState(parsedData);
+        setDataString(JSON.stringify(parsedData, null, 2));
+      } catch (parseError) {
+        console.error("Failed to parse hardcodedData.json:", parseError);
+        setHardcodedDataState({});
+        setDataString(JSON.stringify({}, null, 2));
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     setDataString(JSON.stringify(hardcodedData, null, 2));
   }, [hardcodedData]);
 
@@ -18,7 +40,14 @@ const DataManagementPage = () => {
     try {
       const newData = JSON.parse(dataString);
       setHardcodedData(newData);
-      alert('Data saved! (Persisted with localStorage if enabled)');
+      fs.writeFile('data/hardcodedData.json', JSON.stringify(newData, null, 2), (err) => {
+        if (err) {
+          console.error("Failed to write hardcodedData.json:", err);
+          alert('Data saved, but failed to persist to file!');
+        } else {
+          alert('Data saved!');
+        }
+      });
     } catch (error) {
       alert('Error parsing JSON: ' + error.message);
     }
@@ -27,16 +56,6 @@ const DataManagementPage = () => {
   const handleExport = () => {
     console.log("Current Hardcoded Data:", JSON.stringify(hardcodedData, null, 2));
     alert("Data logged to console. You can copy it from there.");
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
   };
 
   const handleNavigateJson = (newPath) => {
@@ -58,7 +77,7 @@ const DataManagementPage = () => {
     <div className={styles.pageContainer}>
       <h2 className={styles.title}>Manage Hardcoded Data</h2>
       <p className={styles.description}>
-        View and edit the application's hardcoded data. Changes are persisted using localStorage.
+        View and edit the application's hardcoded data. Changes are saved to a JSON file.
       </p>
 
       <div className={styles.viewerContainer}>
@@ -73,26 +92,17 @@ const DataManagementPage = () => {
             </span>
           ))}
         </div>
-        <JsonViewer data={hardcodedData} currentPath={currentPath} onNavigate={handleNavigateJson} />
+        <JsonViewer data={hardcodedData} currentPath={currentPath} onNavigate={handleNavigateJson} onEdit={(newValue, path) => {
+          setHardcodedDataState(updateJsonObject(hardcodedData, path, newValue));
+        }} />
       </div>
 
-      <div className={styles.editorContainer}>
-        <h3>JSON Editor (Full Data)</h3>
-        <textarea
-          value={dataString}
-          onChange={(e) => setDataString(e.target.value)}
-          className={styles.jsonTextarea}
-        />
-        <div className={styles.actions}>
-          <button onClick={handleSave} className={`${styles.button} ${styles.saveButton}`}>
-            Save Data
-          </button>
-          <button onClick={handleExport} className={`${styles.button} ${styles.exportButton}`}>
-            Export JSON to Console
-          </button>
-        </div>
-      </div>
     </div>
   );
 };
+  const setHardcodedData = (newData) => {
+    setHardcodedDataState(newData);
+    setDataString(JSON.stringify(newData, null, 2));
+  };
+
 export default DataManagementPage;

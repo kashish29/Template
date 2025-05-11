@@ -2,8 +2,6 @@
 
 /**
  * Example data transformation function.
- * This is a placeholder and should be expanded based on actual data transformation needs.
- *
  * @param {any} data - The data to transform.
  * @param {string} targetFormat - A string indicating the desired format.
  * @returns {any} - The transformed data.
@@ -35,7 +33,6 @@ export const transformProductDataForTable = (rawProducts) => {
 };
 
 /**
- * Transforms sales summary data for a chart.
  * @param {Object} salesSummary - Raw sales summary.
  * @returns {Object} - Data formatted for a chart library (e.g., Chart.js).
  */
