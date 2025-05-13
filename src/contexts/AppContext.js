@@ -41,11 +41,11 @@ export const AppProvider = ({ children }) => {
   }, []);
 
 
-  const [hardcodedData, setHardcodedDataState] = useState({});
+  const [hardcodedData, setHardcodedDataState] = useState(null);
 
-  const [userPreferences, setUserPreferencesState] = useState({});
+  const [userPreferences, setUserPreferencesState] = useState(null);
 
-  const [ruleSet, setRuleSetState] = useState({});
+  const [ruleSet, setRuleSetState] = useState(null);
 
     
 

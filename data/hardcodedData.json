@@ -1,1 +1,31 @@
-{}
+{
+  "appName": "My Configurable App",
+  "userProfile": {
+    "name": "Demo User",
+    "email": "demo@example.com",
+    "avatarUrl": "https://placehold.co/50x50/007bff/ffffff?text=DU"
+  },
+  "profileDrawerConfig": [
+    { "type": "userInfo", "dataKey": "userProfile" },
+    { "type": "divider" },
+    { "type": "linksGroup", "title": "Navigation", "links": [
+        { "label": "Dashboard", "path": "/" },
+        { "label": "Settings", "path": "/settings" }, 
+        { "label": "My Activity", "path": "/activity" }
+    ]},
+    { "type": "divider" },
+    { "type": "actionButton", "label": "Logout", "action": "logout" }
+  ],
+  "filterOptions": {
+    "categories": [
+      { "value": "tech", "label": "Technology" },
+      { "value": "health", "label": "Healthcare" },
+      { "value": "finance", "label": "Finance" }
+    ],
+    "status": [
+      { "value": "active", "label": "Active" },
+      { "value": "inactive", "label": "Inactive" },
+      { "value": "pending", "label": "Pending" }
+    ]
+  }
+}
